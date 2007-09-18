@@ -1,16 +1,14 @@
-%define	name	cppunit
-%define	version	1.12.0
-%define release	%mkrel 2
-%define	major	0
+%define major 0
 %define api 1.12
-%define libname	%mklibname cppunit %{api}_%{major}
+%define libname %mklibname cppunit %{api}_%{major}
+%define develname %mklibname cppunit -d
 %define testrunnermajor 1
 %define testrunnerlibname %mklibname qttestrunner %testrunnermajor
 
 Summary:	C++ Port of JUnit Testing Framework
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
+Name:		cppunit
+Version:	1.12.0
+Release:	%mkrel 3
 License:	LGPL
 Group:		System/Libraries
 Source0:	%{name}-%{version}.tar.bz2
@@ -45,16 +43,16 @@ testing. Test output is in XML for automatic testing and GUI
 based for supervised tests.
 
 
-%package -n	%{libname}-devel
+%package -n	%{develname}
 Summary:	Development files for %{libname}
 Group:		Development/C++
 Requires:	%{libname} = %{version}
-Provides:	cppunit-devel = %version
-Provides:	libcppunit-devel = %version
-Provides:	libcppunit%{api}-devel = %version
+Provides:	cppunit-devel = %{version}-%{release}
+Provides:	libcppunit-devel = %{version}-%{release}
+Provides:	libcppunit%{api}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname cppunit 1.12_0}
 
-
-%description -n	%{libname}-devel
+%description -n	%{develname}
 CppUnit is the C++ port of the famous JUnit framework for unit
 testing. Test output is in XML for automatic testing and GUI
 based for supervised tests.
@@ -100,7 +98,7 @@ rm -rf %{buildroot}%{_datadir}/cppunit
 #%defattr(-,root,root)
 #%{_libdir}/libqttestrunner.so.%{testrunnermajor}*
 
-%files -n %{libname}-devel
+%files -n %{develname}
 %defattr(644,root,root,755)
 %doc doc/html/*
 %attr(755,root,root) %{_bindir}/cppunit-config
