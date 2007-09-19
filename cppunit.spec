@@ -8,7 +8,7 @@
 Summary:	C++ Port of JUnit Testing Framework
 Name:		cppunit
 Version:	1.12.0
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	LGPL
 Group:		System/Libraries
 Source0:	%{name}-%{version}.tar.bz2
@@ -50,7 +50,7 @@ Requires:	%{libname} = %{version}
 Provides:	cppunit-devel = %{version}-%{release}
 Provides:	libcppunit-devel = %{version}-%{release}
 Provides:	libcppunit%{api}-devel = %{version}-%{release}
-Obsoletes:	%{mklibname cppunit 1.12_0}
+Obsoletes:	%{mklibname cppunit 1.12_0 -d}
 
 %description -n	%{develname}
 CppUnit is the C++ port of the famous JUnit framework for unit
