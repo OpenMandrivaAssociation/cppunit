@@ -17,7 +17,6 @@ URL:		http://cppunit.sourceforge.net/
 BuildRequires:	qt3-devel
 BuildRequires:	doxygen
 BuildRequires:	automake1.7
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
 CppUnit is the C++ port of the famous JUnit framework for unit
