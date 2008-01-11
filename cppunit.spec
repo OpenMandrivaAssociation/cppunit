@@ -8,7 +8,7 @@
 Summary:	C++ Port of JUnit Testing Framework
 Name:		cppunit
 Version:	1.12.0
-Release:	%mkrel 4
+Release:	%mkrel 5
 License:	LGPL
 Group:		System/Libraries
 Source0:	%{name}-%{version}.tar.bz2
