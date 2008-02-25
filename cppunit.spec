@@ -5,18 +5,17 @@
 %define testrunnermajor 1
 %define testrunnerlibname %mklibname qttestrunner %testrunnermajor
 
-Summary:	C++ Port of JUnit Testing Framework
+Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
 Version:	1.12.1
-Release:	%mkrel 1
-License:	LGPL
+Release:	%mkrel 2
+License:	LGPLv2+
 Group:		System/Libraries
-Source0:	%{name}-%{version}.tar.gz
-Patch:		cppunit-1.11.4-missing-include.patch.bz2
 URL:		http://cppunit.sourceforge.net/
+Source0:	http://downloads.sourceforge.net/cppunit/%{name}-%{version}.tar.bz2
+Patch:		cppunit-1.11.4-missing-include.patch
 BuildRequires:	qt3-devel
 BuildRequires:	doxygen
-BuildRequires:	automake1.7
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 
 %description
@@ -24,35 +23,35 @@ CppUnit is the C++ port of the famous JUnit framework for unit
 testing. Test output is in XML for automatic testing and GUI
 based for supervised tests.
 
-%package -n	%{libname}
-Summary:	C++ Port of JUnit Testing Framework
-Group:          System/Libraries
+%package -n %{libname}
+Summary:	C++ port of JUnit Testing Framework
+Group:		System/Libraries
 
 %description -n	%{libname}
 CppUnit is the C++ port of the famous JUnit framework for unit
 testing. Test output is in XML for automatic testing and GUI
 based for supervised tests.
 
-%package -n %testrunnerlibname
-Summary:	QT Testrunner for %name
+%package -n %{testrunnerlibname}
+Summary:	QT Testrunner for %{name}
 Group:		System/Libraries
 
-%description -n %testrunnerlibname
+%description -n %{testrunnerlibname}
 CppUnit is the C++ port of the famous JUnit framework for unit
 testing. Test output is in XML for automatic testing and GUI
 based for supervised tests.
 
 
-%package -n	%{develname}
-Summary:	Development files for %{libname}
+%package -n %{develname}
+Summary:	Development files for %{name}
 Group:		Development/C++
-Requires:	%{libname} = %{version}
-Provides:	cppunit-devel = %{version}-%{release}
-Provides:	libcppunit-devel = %{version}-%{release}
-Provides:	libcppunit%{api}-devel = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
+Provides:	%{name}-devel = %{version}-%{release}
+Provides:	lib%{name}-devel = %{version}-%{release}
+Provides:	lib%{name}%{api}-devel = %{version}-%{release}
 Obsoletes:	%{mklibname cppunit 1.12_0 -d}
 
-%description -n	%{develname}
+%description -n %{develname}
 CppUnit is the C++ port of the famous JUnit framework for unit
 testing. Test output is in XML for automatic testing and GUI
 based for supervised tests.
@@ -67,18 +66,25 @@ based for supervised tests.
     --enable-doxygen 
 
 %make
-cd src/qttestrunner
+pushd src/qttestrunner
 qmake
-make QTDIR=%_prefix/lib/qt3
+make QTDIR=%{_prefix}/lib/qt3
+popd
+
 %install
 [ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-%makeinstall
-cp -d lib/* %buildroot%_libdir
+%makeinstall_std
+
+
+cp -d lib/* %{buildroot}%{_libdir}
+
+#(tpg) do not duplicate docs
+rm -rf  %{buildroot}%{_datadir}/doc/cppunit
 
 # clean up
 rm -rf %{buildroot}%{_datadir}/cppunit
 %if %mdkversion >= 1020
-%multiarch_binaries %buildroot%_bindir/cppunit-config
+%multiarch_binaries %{buildroot}%{_bindir}/cppunit-config
 %endif
 
 %clean
@@ -90,26 +96,25 @@ rm -rf %{buildroot}%{_datadir}/cppunit
 %postun -n %{testrunnerlibname} -p /sbin/ldconfig
 
 %files -n %{libname}
-%defattr(644,root,root,755)
-%doc AUTHORS NEWS README THANKS ChangeLog
-%attr(755,root,root) %{_libdir}/libcppunit-%{api}.so.%{major}*
+%defattr(-,root,root)
+%{_libdir}/libcppunit-%{api}.so.%{major}*
 
 #%files -n %testrunnerlibname
 #%defattr(-,root,root)
 #%{_libdir}/libqttestrunner.so.%{testrunnermajor}*
 
 %files -n %{develname}
-%defattr(644,root,root,755)
-%doc %_datadir/doc/cppunit
-%attr(755,root,root) %{_bindir}/cppunit-config
+%defattr(-,root,root)
+%doc AUTHORS NEWS README THANKS ChangeLog
+%{_bindir}/cppunit-config
 %if %mdkversion >= 1020
-%attr(755,root,root) %{multiarch_bindir}/cppunit-config
+%{multiarch_bindir}/cppunit-config
 %endif
-%attr(755,root,root) %{_bindir}/DllPlugInTester
+%{_bindir}/DllPlugInTester
 %{_libdir}/*.a
 %{_libdir}/*.la
 %{_libdir}/*.so
 %{_includedir}/cppunit
 %{_datadir}/aclocal/cppunit.m4
 %{_mandir}/man1/*
-%_libdir/pkgconfig/cppunit.pc
+%{_libdir}/pkgconfig/cppunit.pc
