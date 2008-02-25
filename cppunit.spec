@@ -1,4 +1,4 @@
-%define major 0
+%define major 1
 %define api 1.12
 %define libname %mklibname cppunit %{api}_%{major}
 %define develname %mklibname cppunit -d
@@ -7,11 +7,11 @@
 
 Summary:	C++ Port of JUnit Testing Framework
 Name:		cppunit
-Version:	1.12.0
-Release:	%mkrel 5
+Version:	1.12.1
+Release:	%mkrel 1
 License:	LGPL
 Group:		System/Libraries
-Source0:	%{name}-%{version}.tar.bz2
+Source0:	%{name}-%{version}.tar.gz
 Patch:		cppunit-1.11.4-missing-include.patch.bz2
 URL:		http://cppunit.sourceforge.net/
 BuildRequires:	qt3-devel
@@ -100,7 +100,7 @@ rm -rf %{buildroot}%{_datadir}/cppunit
 
 %files -n %{develname}
 %defattr(644,root,root,755)
-%doc doc/html/*
+%doc %_datadir/doc/cppunit
 %attr(755,root,root) %{_bindir}/cppunit-config
 %if %mdkversion >= 1020
 %attr(755,root,root) %{multiarch_bindir}/cppunit-config
