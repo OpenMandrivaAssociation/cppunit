@@ -8,12 +8,13 @@
 Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
 Version:	1.12.1
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://cppunit.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/cppunit/%{name}-%{version}.tar.bz2
 Patch:		cppunit-1.11.4-missing-include.patch
+Patch1:     cppunit-1.12.1-qt3-gcc43.patch
 BuildRequires:	qt3-devel
 BuildRequires:	doxygen
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -60,6 +61,7 @@ based for supervised tests.
 
 %setup -q
 %patch -p1
+%patch1 -p1 -b .qt3
 
 %build
 %configure2_5x \
@@ -71,9 +73,9 @@ perl -pi -e "s|^LIBS =.*|LIBS = -lm -ldl|g" src/cppunit/Makefile
 %make
 
 pushd src/qttestrunner
-export QTDIR=%{_prefix}/lib/qt3
-    ${QTDIR}/bin/qmake
-    make
+export QTDIR=%{qt3dir}
+    %{qt3dir}/bin/qmake
+    %make
 popd
 
 %install
