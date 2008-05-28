@@ -8,7 +8,7 @@
 Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
 Version:	1.12.1
-Release:	%mkrel 2
+Release:	%mkrel 3
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://cppunit.sourceforge.net/
@@ -16,7 +16,7 @@ Source0:	http://downloads.sourceforge.net/cppunit/%{name}-%{version}.tar.bz2
 Patch:		cppunit-1.11.4-missing-include.patch
 BuildRequires:	qt3-devel
 BuildRequires:	doxygen
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 CppUnit is the C++ port of the famous JUnit framework for unit
@@ -65,16 +65,21 @@ based for supervised tests.
 %configure2_5x \
     --enable-doxygen 
 
+# <oden> somehow LIBADD_DL is ignored, is that an intentional change?
+perl -pi -e "s|^LIBS =.*|LIBS = -lm -ldl|g" src/cppunit/Makefile
+
 %make
+
 pushd src/qttestrunner
-qmake
-make QTDIR=%{_prefix}/lib/qt3
+export QTDIR=%{_prefix}/lib/qt3
+    ${QTDIR}/bin/qmake
+    make
 popd
 
 %install
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
-%makeinstall_std
+rm -rf %{buildroot}
 
+%makeinstall_std
 
 cp -d lib/* %{buildroot}%{_libdir}
 
@@ -88,11 +93,14 @@ rm -rf %{buildroot}%{_datadir}/cppunit
 %endif
 
 %clean
-[ "%{buildroot}" != "/" ] && rm -rf %{buildroot}
+rm -rf %{buildroot}
 
 %post -n %{libname} -p /sbin/ldconfig
+
 %postun -n %{libname} -p /sbin/ldconfig
+
 %post -n %{testrunnerlibname} -p /sbin/ldconfig
+
 %postun -n %{testrunnerlibname} -p /sbin/ldconfig
 
 %files -n %{libname}
