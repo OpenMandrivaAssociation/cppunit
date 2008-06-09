@@ -97,13 +97,21 @@ rm -rf %{buildroot}%{_datadir}/cppunit
 %clean
 rm -rf %{buildroot}
 
+%if %mdkversion < 200900
 %post -n %{libname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{libname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %post -n %{testrunnerlibname} -p /sbin/ldconfig
+%endif
 
+%if %mdkversion < 200900
 %postun -n %{testrunnerlibname} -p /sbin/ldconfig
+%endif
 
 %files -n %{libname}
 %defattr(-,root,root)
