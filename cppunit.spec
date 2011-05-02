@@ -8,7 +8,7 @@
 Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
 Version:	1.12.1
-Release:	%mkrel 8
+Release:	%mkrel 9
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://cppunit.sourceforge.net/
@@ -90,9 +90,8 @@ rm -rf  %{buildroot}%{_datadir}/doc/cppunit
 
 # clean up
 rm -rf %{buildroot}%{_datadir}/cppunit
-%if %mdkversion >= 1020
+
 %multiarch_binaries %{buildroot}%{_bindir}/cppunit-config
-%endif
 
 %clean
 rm -rf %{buildroot}
@@ -125,9 +124,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc AUTHORS NEWS README THANKS ChangeLog
 %{_bindir}/cppunit-config
-%if %mdkversion >= 1020
 %{multiarch_bindir}/cppunit-config
-%endif
 %{_bindir}/DllPlugInTester
 %{_libdir}/*.a
 %{_libdir}/*.la
