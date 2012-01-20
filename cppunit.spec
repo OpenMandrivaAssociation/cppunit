@@ -8,16 +8,13 @@
 Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
 Version:	1.12.1
-Release:	%mkrel 9
+Release:	10
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://cppunit.sourceforge.net/
 Source0:	http://downloads.sourceforge.net/cppunit/%{name}-%{version}.tar.bz2
-Patch:		cppunit-1.11.4-missing-include.patch
-Patch1:     cppunit-1.12.1-qt3-gcc43.patch
-BuildRequires:	qt3-devel
-BuildRequires:	doxygen
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Patch0:		cppunit-1.11.4-missing-include.patch
+Patch1:		cppunit-1.12.1-no_lib_in_cppunit-config.diff
 
 %description
 CppUnit is the C++ port of the famous JUnit framework for unit
@@ -32,16 +29,6 @@ Group:		System/Libraries
 CppUnit is the C++ port of the famous JUnit framework for unit
 testing. Test output is in XML for automatic testing and GUI
 based for supervised tests.
-
-%package -n %{testrunnerlibname}
-Summary:	QT Testrunner for %{name}
-Group:		System/Libraries
-
-%description -n %{testrunnerlibname}
-CppUnit is the C++ port of the famous JUnit framework for unit
-testing. Test output is in XML for automatic testing and GUI
-based for supervised tests.
-
 
 %package -n %{develname}
 Summary:	Development files for %{name}
@@ -60,74 +47,42 @@ based for supervised tests.
 %prep
 
 %setup -q
-%patch -p1
-%patch1 -p1 -b .qt3
+%patch0 -p1
+%patch1 -p0
 
 %build
 %configure2_5x \
-    --enable-doxygen 
+    --enable-shared \
+    --disable-static \
+    --disable-doxygen \
+    --disable-dot \
+    --disable-html-docs \
+    --disable-latex-docs
 
 # <oden> somehow LIBADD_DL is ignored, is that an intentional change?
 perl -pi -e "s|^LIBS =.*|LIBS = -lm -ldl|g" src/cppunit/Makefile
 
 %make
 
-pushd src/qttestrunner
-export QTDIR=%{qt3dir}
-    %{qt3dir}/bin/qmake
-    %make
-popd
-
 %install
 rm -rf %{buildroot}
 
 %makeinstall_std
-
-cp -d lib/* %{buildroot}%{_libdir}
 
 #(tpg) do not duplicate docs
 rm -rf  %{buildroot}%{_datadir}/doc/cppunit
 
 # clean up
 rm -rf %{buildroot}%{_datadir}/cppunit
-
-%multiarch_binaries %{buildroot}%{_bindir}/cppunit-config
-
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%post -n %{testrunnerlibname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{testrunnerlibname} -p /sbin/ldconfig
-%endif
+rm -f %{buildroot}%{_libdir}/*.*a
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/libcppunit-%{api}.so.%{major}*
 
-#%files -n %testrunnerlibname
-#%defattr(-,root,root)
-#%{_libdir}/libqttestrunner.so.%{testrunnermajor}*
-
 %files -n %{develname}
-%defattr(-,root,root)
 %doc AUTHORS NEWS README THANKS ChangeLog
 %{_bindir}/cppunit-config
-%{multiarch_bindir}/cppunit-config
 %{_bindir}/DllPlugInTester
-%{_libdir}/*.a
-%{_libdir}/*.la
 %{_libdir}/*.so
 %{_includedir}/cppunit
 %{_datadir}/aclocal/cppunit.m4
