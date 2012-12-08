@@ -1,0 +1,21 @@
+--- cppunit-1.12.1/src/qttestrunner/qttestrunnerlib.pro	2005-12-12 05:40:09.000000000 -0200
++++ cppunit-1.12.1/src/qttestrunner/qttestrunnerlib.pro.new	2008-05-28 16:21:14.000000000 -0300
+@@ -15,7 +15,7 @@
+ CONFIG -= dll
+ CONFIG -= staticlib
+ 
+-CONFIG += qt warn_on debug staticlib
++CONFIG += qt warn_on debug staticlib thread
+ 
+ #CONFIG += qt warn_on release staticlib
+ #CONFIG += qt warn_on debug dll
+--- cppunit-1.12.1/src/qttestrunner/TestRunnerModel.h	2008-02-07 06:37:26.000000000 -0200
++++ cppunit-1.12.1/src/qttestrunner/TestRunnerModel.h.new	2008-05-28 16:21:43.000000000 -0300
+@@ -11,6 +11,7 @@
+ #include <qptrlist.h>
+ #include <qobject.h>
+ #include <qthread.h>
++#include <qmutex.h>
+ #include "TestFailureInfo.h"
+ #include "TestRunnerModelThreadInterface.h"
+ class TestRunnerThread;

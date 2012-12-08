@@ -88,3 +88,115 @@ rm -f %{buildroot}%{_libdir}/*.*a
 %{_datadir}/aclocal/cppunit.m4
 %{_mandir}/man1/*
 %{_libdir}/pkgconfig/cppunit.pc
+
+
+%changelog
+* Mon May 02 2011 Oden Eriksson <oeriksson@mandriva.com> 1.12.1-9mdv2011.0
++ Revision: 661642
+- multiarch fixes
+
+* Tue Nov 30 2010 Oden Eriksson <oeriksson@mandriva.com> 1.12.1-8mdv2011.0
++ Revision: 603852
+- rebuild
+
+* Tue Mar 16 2010 Oden Eriksson <oeriksson@mandriva.com> 1.12.1-7mdv2010.1
++ Revision: 521117
+- rebuilt for 2010.1
+
+* Sun Aug 09 2009 Oden Eriksson <oeriksson@mandriva.com> 1.12.1-6mdv2010.0
++ Revision: 413268
+- rebuild
+
+* Wed Aug 06 2008 Thierry Vignaud <tv@mandriva.org> 1.12.1-5mdv2009.0
++ Revision: 264359
+- rebuild early 2009.0 package (before pixel changes)
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Wed May 28 2008 Helio Chissini de Castro <helio@mandriva.com> 1.12.1-4mdv2009.0
++ Revision: 212774
+- Fix qt3 tool building against gcc 4.3
+
+  + Oden Eriksson <oeriksson@mandriva.com>
+    - fix build
+
+* Mon Feb 25 2008 Tomasz Pawel Gajc <tpg@mandriva.org> 1.12.1-2mdv2008.1
++ Revision: 174955
+- bunzip patch0
+- better descriptions
+- add full url for source
+- fix mixture of tabs and spaces
+- use macros
+- do not duplicate docs
+
+* Mon Feb 25 2008 GÃ¶tz Waschk <waschk@mandriva.org> 1.12.1-1mdv2008.1
++ Revision: 174610
+- new version
+- new major
+- update file list
+
+* Fri Jan 11 2008 Thierry Vignaud <tv@mandriva.org> 1.12.0-5mdv2008.1
++ Revision: 149130
+- rebuild
+- kill re-definition of %%buildroot on Pixel's request
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+* Wed Sep 19 2007 Oden Eriksson <oeriksson@mandriva.com> 1.12.0-4mdv2008.0
++ Revision: 90805
+- whoops!
+
+* Tue Sep 18 2007 Oden Eriksson <oeriksson@mandriva.com> 1.12.0-3mdv2008.0
++ Revision: 89517
+- new devel naming
+
+* Wed Jul 11 2007 GÃ¶tz Waschk <waschk@mandriva.org> 1.12.0-2mdv2008.0
++ Revision: 51174
+- Import cppunit
+
+
+
+* Mon Jul 10 2006 Götz Waschk <waschk@mandriva.org> 1.12.0-2mdv2007.0
+- fix devel deps
+
+* Sun Jul  2 2006 Götz Waschk <waschk@mandriva.org> 1.12.0-1mdv2007.0
+- new major
+- New release 1.12.0
+
+* Thu Jun 29 2006 Stefan van der Eijk <stefan@eijk.nu> 1.11.4-3
+- rebuild for sparc
+
+* Sat Jun 17 2006 GÃ¶tz Waschk <waschk@mandriva.org> 1.11.4-1mdv2007.0
+- rebuild for new libpng
+
+* Tue Jan 31 2006 Götz Waschk <waschk@mandriva.org> 1.11.4-1mdk
+- split out testrunner
+- new major
+- update file list
+- patch for missing header
+- drop patch 0
+- New release 1.11.4
+
+* Mon Jan 16 2006 Götz Waschk <waschk@mandriva.org> 1.10.2-6mdk
+- fix build
+
+* Sat Jan 07 2006 Mandriva Linux Team <http://www.mandrivaexpert.com/> 1.10.2-5mdk
+- Rebuild
+
+* Mon Nov 28 2005 Götz Waschk <waschk@mandriva.org> 1.10.2-4mdk
+- fix previous change
+
+* Tue Nov 22 2005 Götz Waschk <waschk@mandriva.org> 1.10.2-3mdk
+- add qttestrunner
+
+* Tue May  3 2005 Götz Waschk <waschk@mandriva.org> 1.10.2-2mdk
+- multiarch support
+
+* Sat Jun 26 2004 Oden Eriksson <oeriksson@mandrakesoft.com> 1.10.2-1mdk
+- 1.10.2
+- fix the funny libname (%%major)
+
+* Sun Nov 02 2003 Oden Eriksson <oden.eriksson@kvikkjokk.net> 1.8.0-1mdk
+- initial cooker contrib
