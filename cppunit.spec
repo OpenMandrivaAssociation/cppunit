@@ -1,16 +1,16 @@
-%define api	1.12
-%define major	1
+%define api	1.13
+%define major	0
 %define libname	%mklibname cppunit %{api} %{major}
 %define devname	%mklibname cppunit -d
 
 Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
-Version:	1.12.1
-Release:	11
+Version:	1.13.1
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
-Url:		http://cppunit.sourceforge.net/
-Source0:	http://downloads.sourceforge.net/cppunit/%{name}-%{version}.tar.bz2
+Url:		http://www.freedesktop.org/wiki/Software/cppunit/
+Source0:	http://dev-www.libreoffice.org/src/%{name}-%{version}.tar.gz
 Patch0:		cppunit-1.11.4-missing-include.patch
 Patch1:		cppunit-1.12.1-no_lib_in_cppunit-config.diff
 
