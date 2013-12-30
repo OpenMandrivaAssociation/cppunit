@@ -5,8 +5,8 @@
 
 Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
-Version:	1.13.1
-Release:	5
+Version:	1.13.2
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://cppunit.sourceforge.net/
@@ -85,5 +85,6 @@ rm -f %{buildroot}%{_libdir}/*.*a
 %{_datadir}/aclocal/cppunit.m4
 %{_mandir}/man1/*
 %{_libdir}/pkgconfig/cppunit.pc
+
 
 
