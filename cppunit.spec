@@ -6,7 +6,7 @@
 Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
 Version:	1.13.2
-Release:	5
+Release:	6
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://cppunit.sourceforge.net/
@@ -49,7 +49,7 @@ based for supervised tests.
 %patch1 -p0
 
 %build
-%configure2_5x \
+%configure \
     --enable-shared \
     --disable-static \
     --disable-doxygen \
@@ -85,6 +85,3 @@ rm -f %{buildroot}%{_libdir}/*.*a
 %{_datadir}/aclocal/cppunit.m4
 %{_mandir}/man1/*
 %{_libdir}/pkgconfig/cppunit.pc
-
-
-
