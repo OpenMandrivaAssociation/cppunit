@@ -1,18 +1,17 @@
 %define major 0
-%define api 1.13
+%define api 1.14
 %define libname %mklibname cppunit %{api}_%{major}
 %define develname %mklibname cppunit -d
 
 Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
-Version:	1.13.2
-Release:	7
+Version:	1.14.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
-URL:		http://cppunit.sourceforge.net/
+URL:		https://freedesktop.org/wiki/Software/cppunit/
 Source0:	http://dev-www.libreoffice.org/src/%{name}-%{version}.tar.gz
 Patch0:		cppunit-1.11.4-missing-include.patch
-Patch1:		cppunit-1.12.1-no_lib_in_cppunit-config.diff
 
 %description
 CppUnit is the C++ port of the famous JUnit framework for unit
@@ -45,8 +44,7 @@ based for supervised tests.
 %prep
 
 %setup -q
-%patch0 -p1
-%patch1 -p0
+%apply_patches
 
 %build
 %configure \
@@ -78,10 +76,7 @@ rm -f %{buildroot}%{_libdir}/*.*a
 
 %files -n %{develname}
 %doc AUTHORS NEWS README THANKS ChangeLog
-%{_bindir}/cppunit-config
 %{_bindir}/DllPlugInTester
 %{_libdir}/*.so
 %{_includedir}/cppunit
-%{_datadir}/aclocal/cppunit.m4
-%{_mandir}/man1/*
 %{_libdir}/pkgconfig/cppunit.pc

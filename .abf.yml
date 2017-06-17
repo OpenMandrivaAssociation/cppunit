@@ -1,5 +1,2 @@
-removed_sources:
-  cppunit-1.12.1.tar.bz2: 525d8684d09b0295d99511d708dcf8bf2d161782
-  cppunit-1.13.1.tar.gz: 8dc813a57c0c7a06e7e68dd38bdc7238f954f4ab
 sources:
-  cppunit-1.13.2.tar.gz: 0eaf8bb1dcf4d16b12bec30d0732370390d35e6f
+  cppunit-1.14.0.tar.gz: 3eba38567bad4e300f76c764f91a7301bacc716d
