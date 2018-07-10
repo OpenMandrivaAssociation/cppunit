@@ -6,7 +6,7 @@
 Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
 Version:	1.14.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		https://freedesktop.org/wiki/Software/cppunit/
