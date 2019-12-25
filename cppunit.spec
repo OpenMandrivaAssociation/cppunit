@@ -1,12 +1,12 @@
 %define major 0
-%define api 1.14
+%define api 1.15
 %define libname %mklibname cppunit %{api}_%{major}
 %define develname %mklibname cppunit -d
 
 Summary:	C++ port of JUnit Testing Framework
 Name:		cppunit
-Version:	1.14.0
-Release:	3
+Version:	1.15.1
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		https://freedesktop.org/wiki/Software/cppunit/
@@ -58,11 +58,11 @@ based for supervised tests.
 # <oden> somehow LIBADD_DL is ignored, is that an intentional change?
 perl -pi -e "s|^LIBS =.*|LIBS = -lm -ldl|g" src/cppunit/Makefile
 
-%make
+%make_build
 
 %install
 
-%makeinstall_std
+%make_install
 
 #(tpg) do not duplicate docs
 rm -rf  %{buildroot}%{_datadir}/doc/cppunit
