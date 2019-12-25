@@ -1,4 +1,4 @@
-%define major 0
+%define major 1
 %define api 1.15
 %define libname %mklibname cppunit %{api}_%{major}
 %define develname %mklibname cppunit -d
