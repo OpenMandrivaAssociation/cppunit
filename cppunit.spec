@@ -13,6 +13,11 @@ URL:		https://freedesktop.org/wiki/Software/cppunit/
 Source0:	http://dev-www.libreoffice.org/src/%{name}-%{version}.tar.gz
 Patch0:		cppunit-1.11.4-missing-include.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 CppUnit is the C++ port of the famous JUnit framework for unit
 testing. Test output is in XML for automatic testing and GUI
